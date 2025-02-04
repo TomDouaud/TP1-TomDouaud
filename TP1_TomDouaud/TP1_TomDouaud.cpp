@@ -60,7 +60,7 @@ void build(const std::string& uproject_path) {
 
     std::string projectName = data["Modules"][0]["Name"];
 
-    std::string command = "D:/UnrealSource/Engine/Build/BatchFiles/Build.bat " + projectName + "Editor Win64 Development " + uproject_path + " -waitmutex"; // TODO : changer ca c'est dégeulasse
+    std::string command = "cd Engine\\Build\\BatchFiles && Build.bat " + projectName + "Editor Win64 Development " + uproject_path + " -waitmutex"; // TODO : changer ca c'est dégeulasse
     std::cout << command << std::endl;
     system (command.c_str());
 
@@ -69,7 +69,7 @@ void build(const std::string& uproject_path) {
 }
 
 void package(const std::string & uproject_path, const std::string & package_location) {
-    std::string command = "D:/UnrealSource/Engine/Build/BatchFiles/RunUAT.bat  -ScriptsForProject=" + uproject_path + " BuildCookRun -project=" + uproject_path + " -noP4 -clientconfig=Development -serverconfig=Development -nocompileeditor -unrealexe=D:\\UnrealSource\\Engine\\Binaries\\Win64\\UnrealEditor-Cmd.exe -utf8output -platform=Win64 -build -cook -CookCultures=fr -unversionedcookedcontent -stage -package -cmdline=\" -Messaging\" -addcmdline=\"-SessionId=59A0E16E4712A7ABD8B72AA191F94592 -SessionOwner='douau' -SessionName='Test_Tom' \" -archivedirectory=" + package_location + "";
+    std::string command = "cd Engine\\Build\\BatchFiles && RunUAT.bat  -ScriptsForProject=" + uproject_path + " BuildCookRun -project=" + uproject_path + " -noP4 -clientconfig=Development -serverconfig=Development -nocompileeditor -unrealexe=./Engine/Binaries/Win64/UnrealEditor-Cmd.exe -utf8output -platform=Win64 -build -cook -CookCultures=fr -unversionedcookedcontent -stage -package -cmdline=\" -Messaging\" -addcmdline=\"-SessionId=59A0E16E4712A7ABD8B72AA191F94592 -SessionOwner='douau' -SessionName='Test_Tom' \" -archivedirectory=" + package_location;
     system(command.c_str());
     std::cout << "Done ! "<< std::endl;
 };
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
     std::string package_location = "";
 
     if (argc > 3) {
-        std::string package_location = argv[3];
+        std::string package_location = argv[4];
     }
 
     std::cout << "UProject Path: " << uproject_path << std::endl;
